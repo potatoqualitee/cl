@@ -13,7 +13,7 @@ function Import-ModuleFile {
 }
 
 # Detect whether at some level dotsourcing was enforced
-if ($PSCLbot_dotsourcemodule) { $script:doDotSource }
+if ($C_dotsourcemodule) { $script:doDotSource }
 
 # Import all internal functions
 foreach ($function in (Get-ChildItem "$ModuleRoot\private\" -Filter "*.ps1" -Recurse -ErrorAction Ignore)) {
@@ -25,46 +25,33 @@ foreach ($function in (Get-ChildItem "$ModuleRoot\public" -Filter "*.ps1" -Recur
     . Import-ModuleFile -Path $function.FullName
 }
 
-switch ($PSVersionTable.Platform) {
-    "Unix" { $script:configfile = "$home/cl/config.json" }
-    default { $script:configfile = "$env:APPDATA\cl\config.json" }
-}
-
-if (-not (Test-Path -Path $script:configfile)) {
-    $null = New-ConfigFile
-}
-
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-$PSDefaultParameterValues["*:UseBasicParsing"] = $true
-$script:pagination = @{}
-
-Register-ArgumentCompleter -ParameterName SubSound -CommandName Set-PSCLConfig -ScriptBlock {
+Register-ArgumentCompleter -ParameterName SubSound -CommandName Set-PSLConfig -ScriptBlock {
     param($wordToComplete, $commandAst, $cursorPosition)
     $script:sounds | Where-Object { $PSitem -match $wordToComplete } | ForEach-Object {
         [System.Management.Automation.CompletionResult]::new($PSItem, $PSItem, "ParameterName", $PSItem)
     }
 }
-Register-ArgumentCompleter -ParameterName FollowSound -CommandName Set-PSCLConfig -ScriptBlock {
+Register-ArgumentCompleter -ParameterName FollowSound -CommandName Set-PSLConfig -ScriptBlock {
     param($wordToComplete, $commandAst, $cursorPosition)
     $script:sounds | Where-Object { $PSitem -match $wordToComplete } | ForEach-Object {
         [System.Management.Automation.CompletionResult]::new($PSItem, $PSItem, "ParameterName", $PSItem)
     }
 }
-Register-ArgumentCompleter -ParameterName Since -CommandName Get-PSCLFollower -ScriptBlock {
+Register-ArgumentCompleter -ParameterName Since -CommandName Get-PSLFollower -ScriptBlock {
     param($wordToComplete, $commandAst, $cursorPosition)
     "StreamStart", "LastStream" | ForEach-Object {
         [System.Management.Automation.CompletionResult]::new($PSItem, $PSItem, "ParameterName", $PSItem)
     }
 }
 
-$config = Get-PSCLConfig
+$config = Get-PSLConfig
 if (-not $config.ClientId -and -not $config.Token) {
-    Write-Warning "ClientId and Token not found. Please use Set-PSCLConfig to set your ClientId and Token."
+    Write-Warning "ClientId and Token not found. Please use Set-PSLConfig to set your ClientId and Token."
 }
 
 
 ##################### Config setup #####################
-$config = Get-PSCLConfig
+$config = Get-PSLConfig
 $dir = Split-Path -Path $config.ConfigFile
 $params = @{}
 
@@ -110,7 +97,7 @@ foreach ($setting in $settings) {
 }
 
 ######### Set variables and write to file
-if ((Get-PSCLSystemTheme).Theme -eq "dark") {
+if ((Get-PSLSystemTheme).Theme -eq "dark") {
     $color = "White"
 } else {
     $color = "Black"
@@ -152,9 +139,9 @@ foreach ($key in $newparams.Keys) {
     }
 }
 
-$config = Set-PSCLConfig @params -Force
+$config = Set-PSLConfig @params -Force
 if (-not $config.BotClientId -and -not $config.BotToken) {
-    Write-Warning "BotClientId and BotToken not found. Please use Set-PSCLConfig to set your BotClientId and BotToken. If no BotChannel is set, the bot will join its own channel."
+    Write-Warning "BotClientId and BotToken not found. Please use Set-PSLConfig to set your BotClientId and BotToken. If no BotChannel is set, the bot will join its own channel."
 }
 
 

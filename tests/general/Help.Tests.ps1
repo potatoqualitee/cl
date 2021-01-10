@@ -112,7 +112,7 @@ foreach ($command in $commands) {
         $testparamserrors = 0
         Context "Test parameter help for $commandName" {
 
-            $Common = 'Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutBuffer', 'OuPSCLariable',
+            $Common = 'Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutBuffer', 'OuPSLariable',
             'PipelineVariable', 'Verbose', 'WarningAction', 'WarningVariable'
 
             $parameters = $command.ParameterSets.Parameters | Sort-Object -Property Name -Unique | Where-Object Name -notin $common

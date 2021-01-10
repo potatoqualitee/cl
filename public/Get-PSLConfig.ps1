@@ -1,4 +1,4 @@
-function Get-PSCLConfig {
+function Get-PSLConfig {
     <#
     .SYNOPSIS
         Gets configuration values
@@ -52,7 +52,7 @@ function Get-PSCLConfig {
         # if called from the command line or from Set remove sensitive info
         $callstack = Get-PSCallStack
 
-        if (($callstack).Count -eq 2 -or $callstack[1].Command -eq 'Set-PSCLConfig' -and -not $Force) {
+        if (($callstack).Count -eq 2 -or $callstack[1].Command -eq 'Set-PSLConfig' -and -not $Force) {
             $hidden = "ClientID", "Token", "DiscordWebhook", "BotClientId", "BotToken", "HueToken"
             foreach ($item in $hidden) {
                 if ($results.$item) {

@@ -1,4 +1,4 @@
-function Set-PSCLConfig {
+function Set-PSLConfig {
     <#
     .SYNOPSIS
         Connects to a Twitch
@@ -102,7 +102,7 @@ function Set-PSCLConfig {
             if ($key -notin $ignorecommonargs -and $key -notin "Append", "Force", "WhatIf", "Confirm") {
                 if ($key -in "UsersToIgnore", "NotifyType", "BotOwner", "ScriptsToProcess") {
                     if ($Append) {
-                        $value = @(Get-PSCLConfigValue -Name $key)
+                        $value = @(Get-PSLConfigValue -Name $key)
                         $value += $PSBoundParameters.$key
                         $value = $value -join ", "
                     } else {
@@ -127,7 +127,7 @@ function Set-PSCLConfig {
 
         if ($PSCmdlet.ShouldProcess($script:configfile, "Writing config file")) {
             $config | ConvertTo-Json | Set-Content -Path $script:configfile -Encoding Unicode
-            Get-PSCLConfig -Force:$Force
+            Get-PSLConfig -Force:$Force
         }
     }
 }

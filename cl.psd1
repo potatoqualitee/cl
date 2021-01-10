@@ -41,11 +41,11 @@
 
     # Functions to export from this module
     FunctionsToExport  = @(
-        'Get-PSCLConfig',
-        'Get-PSCLConfigValue',
-        'Set-PSCLConfig',
-        'Edit-PSCLConfigFile',
-        'Reset-PSCLConfig'
+        'Get-PSLConfig',
+        'Get-PSLConfigValue',
+        'Set-PSLConfig',
+        'Edit-PSLConfigFile',
+        'Reset-PSLConfig'
     )
 
     # Cmdlets to export from this module
@@ -67,7 +67,7 @@
             Category     = "Scripting Techniques"
 
             # Keyword tags to help users find this module via navigations and search.
-            Tags         = @("configuration", "config", "logging")
+            Tags         = @("configuration", "config", "logging", "log")
 
             # The web address of an icon which can be used in galleries to represent this module
             IconUri      = ""

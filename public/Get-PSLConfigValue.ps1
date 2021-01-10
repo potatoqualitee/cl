@@ -1,4 +1,4 @@
-function Get-PSCLConfigValue {
+function Get-PSLConfigValue {
     <#
     .SYNOPSIS
         Gets configuration values
@@ -17,6 +17,6 @@ function Get-PSCLConfigValue {
         [string]$Name
     )
     process {
-        Get-PSCLConfig -Name $Name | Select-Object -ExpandProperty $Name
+        Get-PSLConfig -Name $Name | Select-Object -ExpandProperty $Name
     }
 }

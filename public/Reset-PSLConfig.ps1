@@ -1,4 +1,4 @@
-function Reset-PSCLConfig {
+function Reset-PSLConfig {
     <#
     .SYNOPSIS
         Gets configuration values
@@ -19,10 +19,10 @@ function Reset-PSCLConfig {
         New-ConfigFile
 
         # importing the module sets up pics and stuff too
-        if (Get-Module -Name PSCLbot) {
-            Import-Module PSCLbot -Force
+        if (Get-Module -Name PSLbot) {
+            Import-Module PSLbot -Force
         }
 
-        Get-PSCLConfig
+        Get-PSLConfig
     }
 }

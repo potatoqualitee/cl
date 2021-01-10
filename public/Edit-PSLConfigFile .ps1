@@ -1,4 +1,4 @@
-function Edit-PSCLConfigFile {
+function Edit-PSLConfigFile {
     <#
     .SYNOPSIS
         Gets configuration values

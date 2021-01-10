@@ -24,7 +24,7 @@ Describe 'Invoking PSScriptAnalyzer against commandbase' {
             forEach ($rule in $scriptAnalyzerRules) {
                 It "Should pass $rule" {
                     If ($analysis.RuleName -contains $rule) {
-                        $analysis | Where-Object RuleName -EQ $rule -ouPSCLariable failures | ForEach-Object { $list.Add($_) }
+                        $analysis | Where-Object RuleName -EQ $rule -ouPSLariable failures | ForEach-Object { $list.Add($_) }
 
                         1 | Should Be 0
                     } else {
