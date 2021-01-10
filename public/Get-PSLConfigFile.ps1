@@ -1,4 +1,4 @@
-function New-ConfigFile {
+function Get-PSLConfigFile {
     [CmdletBinding()]
     param(
         [string]$Module = (Get-PSLCallingModule)

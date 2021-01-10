@@ -41,10 +41,11 @@
 
     # Functions to export from this module
     FunctionsToExport  = @(
+        'Edit-PSLConfigFile',
         'Get-PSLConfig',
         'Get-PSLConfigValue',
+        'Get-PSLConfigFile',
         'Set-PSLConfig',
-        'Edit-PSLConfigFile',
         'Reset-PSLConfig'
     )
 
