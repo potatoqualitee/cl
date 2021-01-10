@@ -1,2 +1,2 @@
 # cl
-lightweight config and logging
+clweight config and logging
